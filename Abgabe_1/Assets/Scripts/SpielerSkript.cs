@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpielerSkript : MonoBehaviour
 {
-    private float rotSpeed=100;
+    private float rotSpeed=1;
     private float moveSpeed=5;
     // Start is called before the first frame update
     void Start()
@@ -22,13 +22,15 @@ public class SpielerSkript : MonoBehaviour
         transform.position+=moveDirection*moveSpeed*Time.deltaTime;
         float rotDirection;
         if(rotateLeft&!rotateRight) {
-            rotDirection=-1;
+            rotDirection=-100;
         }
         else if(rotateRight&!rotateLeft)    {
-            rotDirection=1;
+            rotDirection=100;
         }
         else rotDirection=0;
-
-        transform.Rotate (new Vector3(0, rotDirection, 0)*Time.deltaTime*rotSpeed);
+        Vector3 rotationVector=new Vector3(0, rotDirection, 0);
+        Quaternion targetDirection=Quaternion.Euler(rotationVector)*transform.rotation;
+        Quaternion lookingDirection=transform.rotation;
+       transform.rotation=Quaternion.Lerp(transform.rotation, targetDirection, rotSpeed*Time.deltaTime);
     }
 }
