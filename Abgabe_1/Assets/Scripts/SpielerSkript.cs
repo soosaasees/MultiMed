@@ -30,7 +30,6 @@ public class SpielerSkript : MonoBehaviour
         else rotDirection=0;
         Vector3 rotationVector=new Vector3(0, rotDirection, 0);
         Quaternion targetDirection=Quaternion.Euler(rotationVector)*transform.rotation;
-        Quaternion lookingDirection=transform.rotation;
        transform.rotation=Quaternion.Lerp(transform.rotation, targetDirection, rotSpeed*Time.deltaTime);
     }
 }
