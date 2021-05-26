@@ -5,6 +5,7 @@ using UnityEngine;
 public class MuenzSkript : MonoBehaviour
 {
     public Transform myPrefab;
+    public Transform meineVFX;
     public GameObject myParent;
     private LinkedList<Transform> myPrefabList=new LinkedList<Transform>();
     private LinkedList<Vector3> myPositionList=new LinkedList<Vector3>();
@@ -15,7 +16,10 @@ public class MuenzSkript : MonoBehaviour
             Transform t=Instantiate(myPrefab, new Vector3(0, 0, 0), Quaternion.identity );
             t.SetParent(myParent.transform);
             myPrefabList.AddLast(t);
-            
+            Transform v=Instantiate(meineVFX, new Vector3(0,0,0), Quaternion.identity);
+            v.SetParent(t);
+            //v.localPosition=new Vector3(0,0,0);
+
             myPositionList.AddLast(new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 1.5f, UnityEngine.Random.Range(-0.5f, 0.5f)));
         }
     }
